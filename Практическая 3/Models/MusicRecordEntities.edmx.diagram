@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ada83cfc1bb41d39e4462ad2e74b4e3" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="MusicRecordModel.AlbumPreliminaryMeetings" Width="1.5" PointX="12" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.AlbumRequests" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Albums" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Artists" Width="1.5" PointX="7.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.ContractsWithManufacturers" Width="1.5" PointX="15" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.ContractsWithStores" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.FinancialReports" Width="1.5" PointX="7.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Manufacturers" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Producers" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.ProductionRequests" Width="1.5" PointX="12" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.RecordingRooms" Width="1.5" PointX="7.5" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.RevenueReports" Width="1.5" PointX="12" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Roles" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.RoomSchedules" Width="1.5" PointX="9.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Shipments" Width="1.5" PointX="12" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Stores" Width="1.5" PointX="9.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.StudioExpenses" Width="1.5" PointX="7.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.Studios" Width="1.5" PointX="5.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicRecordModel.UserAccounts" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="MusicRecordModel.FK__AlbumPrel__reque__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__AlbumRequ__artis__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Albums__artist_i__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Productio__album__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__RevenueRe__album__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Shipments__album__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK_ContractsWithManufacturers_Albums" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Artists__account__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Artists__produce__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__RoomSched__artis__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Contracts__manuf__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Contracts__store__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Financial__studi__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Producers__accou__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Recording__studi__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__RoomSched__room___60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK_UserAccounts_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__Shipments__store__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicRecordModel.FK__StudioExp__studi__02084FDA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

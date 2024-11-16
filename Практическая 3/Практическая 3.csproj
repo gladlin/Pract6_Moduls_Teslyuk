@@ -35,9 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +65,87 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AlbumPreliminaryMeetings.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AlbumRequests.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Albums.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Artists.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContractsWithManufacturers.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContractsWithStores.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinancialReports.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Manufacturers.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MusicRecordEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MusicRecordEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MusicRecordEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MusicRecordEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MusicRecordEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Producers.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductionRequests.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecordingRooms.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RevenueReports.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoomSchedules.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Shipments.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stores.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudioExpenses.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Studios.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserAccounts.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\CaptchaGenerator.cs" />
+    <Compile Include="Services\Helper.cs" />
+    <Compile Include="Services\Hash.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +158,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Autho.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +195,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\MusicRecordEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MusicRecordEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\MusicRecordEntities.edmx.diagram">
+      <DependentUpon>MusicRecordEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -109,12 +211,26 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\pngegg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\pngegg.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\MusicRecordEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MusicRecordEntities.edmx</DependentUpon>
+      <LastGenOutput>MusicRecordEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MusicRecordEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MusicRecordEntities.edmx</DependentUpon>
+      <LastGenOutput>MusicRecordEntities.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

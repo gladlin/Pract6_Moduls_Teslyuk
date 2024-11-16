@@ -9,8 +9,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-
-using Практическая_3.Models;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -18,11 +16,11 @@ using System.Windows.Shapes;
 namespace Практическая_3.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Client.xaml
+    /// Логика взаимодействия для Admin.xaml
     /// </summary>
-    public partial class Client : Page
+    public partial class Admin : Page
     {
-        public Client(UserAccounts user)
+        public Admin()
         {
             InitializeComponent();
         }
