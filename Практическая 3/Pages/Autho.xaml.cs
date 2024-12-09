@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,9 @@ namespace Практическая_3.Pages
     public partial class Autho : Page
     {
         int click;
+        MusicRecordEntities db = Helper.GetContext();
+        private string userName = null;
+        private string userSurname = null;
 
         public Autho()
         {
@@ -25,7 +29,7 @@ namespace Практическая_3.Pages
 
         private void btnEnterGuests_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Client(null));
+            NavigationService.Navigate(new Client(null, "", ""));
         }
 
         private void GenerateCaptcha()
@@ -36,12 +40,34 @@ namespace Практическая_3.Pages
             tbCaptcha.Visibility = Visibility.Visible;
             tblCaptcha.Visibility = Visibility.Visible;
         }
+
+        private void GetName(UserAccounts user, int role)
+        {
+
+             if (role == 1)
+             {
+                 var admin = db.Admins.FirstOrDefault(x => x.account_id == user.account_id);
+                 userName = admin.first_name;
+                 userSurname = admin.last_name;
+             }
+             else if (role == 2)
+             {
+                 var producer = db.Producers.FirstOrDefault(x => x.account_id == user.account_id);
+                 userName = producer.first_name;
+                 userSurname = producer.last_name;
+             }
+            else if (role == 3)
+            {
+                var artist = db.Artists.FirstOrDefault(x => x.account_id == user.account_id);
+                userName = artist.first_name;
+                userSurname = artist.last_name;
+            }
+        }
+
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             string login = tbLogin.Text.Trim();
             string password = Hash.HashPassword(tbPassword.Password.Trim());
-
-            MusicRecordEntities db = Helper.GetContext();
             var user = db.UserAccounts .FirstOrDefault(x => x.username == login && x.password == password);
 
 
@@ -137,19 +163,32 @@ namespace Практическая_3.Pages
         private void LoadPage(UserAccounts user)
         {
             click = 0;
-            switch (user.role_id)
+            GetName(user, user.role_id);
+            TimeSpan userTime = (DateTime.Now.TimeOfDay);
+            TimeSpan morning = new TimeSpan(10, 0, 0);
+            TimeSpan deepEvening = new TimeSpan(19, 0, 0);
+            if (userTime < morning || userTime > deepEvening)
             {
-                case 1:
-                    NavigationService.Navigate(new Admin());
-                    break;
-                case 2:
-                case 3:
-                    NavigationService.Navigate(new Client(user));
-                    break;
-                default:
-                    MessageBox.Show("Неизвестная роль пользователя.");
-                    break;
+                MessageBox.Show("Неподходящее время для работы");
             }
+
+            else if (userName != null && userSurname != null)
+            {
+                switch (user.role_id)
+                {
+                    case 1:
+                        NavigationService.Navigate(new Admin(user, userName, userSurname));
+                        break;
+                    case 2:
+                    case 3:
+                        NavigationService.Navigate(new Client(user, userName, userSurname));
+                        break;
+                    default:
+                        MessageBox.Show("Неизвестная роль пользователя.");
+                        break;
+                }
+            }
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

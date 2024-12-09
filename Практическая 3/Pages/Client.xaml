@@ -6,9 +6,29 @@
       xmlns:local="clr-namespace:Практическая_3.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Client">
+      Title="Client" Background="White">
 
     <Grid>
         <TextBlock Text="У вас роль продюссера/исполнителя" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="DarkGreen"/>
+        <TextBlock x:Name="tbGreeting" HorizontalAlignment="Left" Margin="646,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" RenderTransformOrigin="0.5,0.5" Width="144">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="tbUserName" HorizontalAlignment="Left" Margin="646,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" RenderTransformOrigin="0.5,0.5" Width="145">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
     </Grid>
 </Page>

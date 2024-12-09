@@ -19,6 +19,7 @@ namespace Практическая_3.Models
         {
             this.Artists = new HashSet<Artists>();
             this.Producers = new HashSet<Producers>();
+            this.Admins = new HashSet<Admins>();
         }
     
         public int account_id { get; set; }
@@ -32,5 +33,7 @@ namespace Практическая_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Producers> Producers { get; set; }
         public virtual Roles Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Admins> Admins { get; set; }
     }
 }

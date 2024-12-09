@@ -65,6 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Admins.cs">
+      <DependentUpon>MusicRecordEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AlbumPreliminaryMeetings.cs">
       <DependentUpon>MusicRecordEntities.tt</DependentUpon>
     </Compile>

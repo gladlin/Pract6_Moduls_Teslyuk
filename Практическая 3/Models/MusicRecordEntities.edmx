@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище MusicRecordModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище MusicRecordModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" Nullable="false" />
+          <Property Name="account_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="char" MaxLength="24" Nullable="false" />
+          <Property Name="last_name" Type="char" MaxLength="24" Nullable="false" />
+        </EntityType>
         <EntityType Name="AlbumPreliminaryMeetings">
           <Key>
             <PropertyRef Name="meeting_id" />
@@ -408,6 +417,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Admins_UserAccounts">
+          <End Role="UserAccounts" Type="Self.UserAccounts" Multiplicity="1" />
+          <End Role="Admins" Type="Self.Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="account_id" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ContractsWithManufacturers_Albums">
           <End Role="Albums" Type="Self.Albums" Multiplicity="0..1" />
           <End Role="ContractsWithManufacturers" Type="Self.ContractsWithManufacturers" Multiplicity="*" />
@@ -433,6 +454,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище MusicRecordModelContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlbumPreliminaryMeetings" EntityType="Self.AlbumPreliminaryMeetings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlbumRequests" EntityType="Self.AlbumRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
@@ -521,6 +543,10 @@
             <End Role="Studios" EntitySet="Studios" />
             <End Role="StudioExpenses" EntitySet="StudioExpenses" />
           </AssociationSet>
+          <AssociationSet Name="FK_Admins_UserAccounts" Association="Self.FK_Admins_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
           <AssociationSet Name="FK_ContractsWithManufacturers_Albums" Association="Self.FK_ContractsWithManufacturers_Albums">
             <End Role="Albums" EntitySet="Albums" />
             <End Role="ContractsWithManufacturers" EntitySet="ContractsWithManufacturers" />
@@ -530,8 +556,7 @@
             <End Role="UserAccounts" EntitySet="UserAccounts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MusicRecordModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -771,6 +796,7 @@
           <NavigationProperty Name="Artists" Relationship="Self.FK__Artists__account__5812160E" FromRole="UserAccounts" ToRole="Artists" />
           <NavigationProperty Name="Producers" Relationship="Self.FK__Producers__accou__5535A963" FromRole="UserAccounts" ToRole="Producers" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_UserAccounts_Roles" FromRole="UserAccounts" ToRole="Roles" />
+          <NavigationProperty Name="Admins" Relationship="MusicRecordModel.FK_Admins_UserAccounts" FromRole="UserAccounts" ToRole="Admins" />
         </EntityType>
         <Association Name="FK__AlbumPrel__reque__6754599E">
           <End Role="AlbumRequests" Type="Self.AlbumRequests" Multiplicity="1" />
@@ -1097,7 +1123,34 @@
             <End Role="Studios" EntitySet="Studios" />
             <End Role="StudioExpenses" EntitySet="StudioExpenses" />
           </AssociationSet>
+          <EntitySet Name="Admins" EntityType="MusicRecordModel.Admins" />
+          <AssociationSet Name="FK_Admins_UserAccounts" Association="MusicRecordModel.FK_Admins_UserAccounts">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="Admins" EntitySet="Admins" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="account_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="24" FixedLength="true" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="24" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="UserAccounts" Relationship="MusicRecordModel.FK_Admins_UserAccounts" FromRole="Admins" ToRole="UserAccounts" />
+        </EntityType>
+        <Association Name="FK_Admins_UserAccounts">
+          <End Type="MusicRecordModel.UserAccounts" Role="UserAccounts" Multiplicity="1" />
+          <End Type="MusicRecordModel.Admins" Role="Admins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="account_id" />
+            </Principal>
+            <Dependent Role="Admins">
+              <PropertyRef Name="account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1320,6 +1373,16 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="MusicRecordModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="account_id" ColumnName="account_id" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

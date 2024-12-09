@@ -22,9 +22,33 @@ namespace Практическая_3.Pages
     /// </summary>
     public partial class Client : Page
     {
-        public Client(UserAccounts user)
+        public Client(UserAccounts user, string userName, string userSurname)
         {
             InitializeComponent();
+            printGreeting(userName, userSurname);
+        }
+        private void printGreeting(string userName, string userSurname)
+        {
+            TimeSpan userTime = (DateTime.Now.TimeOfDay);
+            TimeSpan morning = new TimeSpan(10, 0, 0);
+            TimeSpan day = new TimeSpan(12, 0, 0);
+            TimeSpan evening = new TimeSpan(17, 0, 0);
+            TimeSpan deepEvening = new TimeSpan(19, 0, 0);
+
+            if (userTime >= morning && userTime <= day)
+            {
+                tbGreeting.Text = "Доброе утро!";
+
+            }
+            else if (userTime >= day && userTime <= evening)
+            {
+                tbGreeting.Text = "Добрый день!";
+            }
+            else if (userTime >= evening && userTime <= deepEvening)
+            {
+                tbGreeting.Text = "Добрый вечер!";
+            }
+            tbUserName.Text = userSurname + " " + userName;
         }
     }
 }

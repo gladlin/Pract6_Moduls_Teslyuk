@@ -45,5 +45,6 @@ namespace Практическая_3.Models
         public virtual DbSet<Studios> Studios { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UserAccounts> UserAccounts { get; set; }
+        public virtual DbSet<Admins> Admins { get; set; }
     }
 }

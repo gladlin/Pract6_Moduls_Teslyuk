@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7ada83cfc1bb41d39e4462ad2e74b4e3" Name="Diagram1" ZoomLevel="88">
+      <Diagram DiagramId="7ada83cfc1bb41d39e4462ad2e74b4e3" Name="Diagram1" ZoomLevel="146">
         <EntityTypeShape EntityType="MusicRecordModel.AlbumPreliminaryMeetings" Width="1.5" PointX="12" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicRecordModel.AlbumRequests" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MusicRecordModel.Albums" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
@@ -44,6 +44,8 @@
         <AssociationConnector Association="MusicRecordModel.FK_UserAccounts_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="MusicRecordModel.FK__Shipments__store__797309D9" ManuallyRouted="false" />
         <AssociationConnector Association="MusicRecordModel.FK__StudioExp__studi__02084FDA" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MusicRecordModel.Admins" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="MusicRecordModel.FK_Admins_UserAccounts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
