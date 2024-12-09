@@ -231,6 +231,7 @@
       <DependentUpon>MusicRecordEntities.edmx</DependentUpon>
       <LastGenOutput>MusicRecordEntities.cs</LastGenOutput>
     </Content>
+    <Resource Include="pngegg.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

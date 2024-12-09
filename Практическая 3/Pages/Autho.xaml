@@ -8,12 +8,16 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Autho" Background="White">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="143*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="285">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="286">
             <TextBlock Text="Логин:"/>
             <TextBox x:Name="tbLogin"/>
             <TextBlock Text="Пароль:"/>
@@ -30,5 +34,7 @@
                 <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btnEnter_Click"/>
             </StackPanel>
         </StackPanel>
+        <TextBox x:Name="tbLeftTime" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="Wrap" Text="Оставшееся время: " VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" BorderBrush="White"/>
+        <TextBox x:Name="tbTimer" HorizontalAlignment="Left" Margin="130,245,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="48"  Foreground="Red" BorderBrush="White"/>
     </Grid>
 </Page>
