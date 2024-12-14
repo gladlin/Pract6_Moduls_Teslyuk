@@ -1,16 +1,51 @@
-﻿<Page x:Class="Практическая_3.Pages.Admin"
+﻿<Page x:Class="Практическая_3.Pages.Admin" 
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Практическая_3.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="800"
       Title="Admin" Background="White">
 
     <Grid>
-        <TextBlock Text="У вас роль админа" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="DarkGreen"/>
+        <TextBlock Text="Admin's Page" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Margin="0,13,0,0"/>
         <TextBlock x:Name="tbGreeting" HorizontalAlignment="Left" Margin="646,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
         <TextBlock x:Name="tbUserName" HorizontalAlignment="Left" Margin="646,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
+
+        <ListView Name="LViewProduct" Grid.Column="0" Grid.ColumnSpan="1"
+                  Grid.Row="0" Margin="5,5,-187,-239" d:ItemsSource="{d:SampleData}" SelectionChanged="LViewProduct_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Backgroud}" Width="200" Margin="5">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Width="100" Height="100" Margin="5" />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Role}" TextAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Email}" TextAlignment="Center" Margin="5"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.ContextMenu>
+                <ContextMenu Name="contextMenu">
+                    <MenuItem Name="btnSeeUser" Header="Перейти к пользователю"
+                              Click="btnSeeUser_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
     </Grid>
 </Page>

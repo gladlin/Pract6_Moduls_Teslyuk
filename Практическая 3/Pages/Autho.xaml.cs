@@ -21,6 +21,7 @@ namespace Практическая_3.Pages
         {
             InitializeComponent();
             click = 0;
+            ClearAll();
             tbCaptcha.Visibility = Visibility.Hidden;
             tblCaptcha.Visibility = Visibility.Hidden;
             tbTimer.Visibility = Visibility.Hidden;
@@ -30,11 +31,11 @@ namespace Практическая_3.Pages
         private void btnEnterGuests_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Client(null, "", ""));
+            ClearAll();
         }
 
         private void GenerateCaptcha()
         {
-            click++;
             tblCaptcha.Text = CaptchaGenerator.GenerateCaptchaText(6);
             tblCaptcha.TextDecorations = TextDecorations.Strikethrough;
             tbCaptcha.Visibility = Visibility.Visible;
@@ -66,10 +67,10 @@ namespace Практическая_3.Pages
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
+            click++;
             string login = tbLogin.Text.Trim();
             string password = Hash.HashPassword(tbPassword.Password.Trim());
-            var user = db.UserAccounts .FirstOrDefault(x => x.username == login && x.password == password);
-
+            var user = db.UserAccounts.FirstOrDefault(x => x.username == login && x.password == password);
 
             if (click <= 1)
             {
@@ -78,30 +79,21 @@ namespace Практическая_3.Pages
                     MessageBox.Show("Вы ввели логин или пароль неверно!");
                     tbPassword.Clear();
                     tbLogin.Clear();
+                    tbCaptcha.Clear();
                     GenerateCaptcha();
                 }
                 else
                 {
                     string roleName = user.Roles.role_name;
-                    MessageBox.Show($"Вы вошли под: {roleName}");
-                    tbLogin.Clear();
-                    tbPassword.Clear();
-                    tbCaptcha.Clear();
                     LoadPage(user);
 
                 }
             }
-            else if (click == 2)
+            else if (click <= 3)
             {
                 if (user != null && tbCaptcha.Text.Trim() == tblCaptcha.Text)
                 {
                     string roleName = user.Roles.role_name;
-                    MessageBox.Show($"Вы вошли под: {roleName}");
-                    tbLogin.Clear();
-                    tbPassword.Clear();
-                    tbCaptcha.Clear();
-                    tblCaptcha.Visibility = Visibility.Hidden;
-                    tbCaptcha.Visibility = Visibility.Hidden;
                     LoadPage(user);
                 }
                 else
@@ -111,13 +103,21 @@ namespace Практическая_3.Pages
                     GenerateCaptcha();
                 }
             }
-            else if(click == 3)
+            else if(click == 4)
             {
-                MessageBox.Show("Вы три раза неверно ввели данные!");
-                click = 0;
-                btnEnter.IsEnabled = false;
-                btnEnterGuests.IsEnabled = false;
-                StartTimer();
+                if (user != null && tbCaptcha.Text.Trim() == tblCaptcha.Text)
+                {
+                    string roleName = user.Roles.role_name;
+                    LoadPage(user);
+                }
+                else
+                {
+                    MessageBox.Show("Вы три раза неверно ввели данные!");
+                    click = 0;
+                    btnEnter.IsEnabled = false;
+                    btnEnterGuests.IsEnabled = false;
+                    StartTimer();
+                }
             }
         }
 
@@ -126,11 +126,7 @@ namespace Практическая_3.Pages
         private void StartTimer()
         {
             remainingSeconds = 10;
-            tbCaptcha.Clear();
-            tbCaptcha.Visibility = Visibility.Hidden;
-            tblCaptcha.Visibility = Visibility.Hidden;
-            tbPassword.Clear();
-            tbLogin.Clear();
+            ClearAll();
             tbPassword.IsEnabled = false;
             tbLogin.IsEnabled = false;
             tbTimer.Visibility = Visibility.Visible;
@@ -159,9 +155,20 @@ namespace Практическая_3.Pages
             }
         }
 
+        private void ClearAll()
+        {
+
+            tbLogin.Clear();
+            tbPassword.Clear();
+            tbCaptcha.Visibility = Visibility.Hidden;
+            tblCaptcha.Visibility = Visibility.Hidden;
+            tbCaptcha.Clear();
+        }
+
 
         private void LoadPage(UserAccounts user)
         {
+            ClearAll();
             click = 0;
             GetName(user, user.role_id);
             TimeSpan userTime = (DateTime.Now.TimeOfDay);

@@ -18,6 +18,7 @@ namespace Практическая_3.Models
         public int account_id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
+        public string middle_name { get; set; }
     
         public virtual UserAccounts UserAccounts { get; set; }
     }
