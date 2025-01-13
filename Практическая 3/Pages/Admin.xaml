@@ -29,9 +29,9 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Background="{Binding Backgroud}" Width="200" Margin="5">
+                    <Border BorderBrush="Black" BorderThickness="1" Background="White" Width="200" Margin="5">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Width="100" Height="100" Margin="5" />
+                            <Image Width="100" Height="100" Margin="5" Source="{Binding PicturePath}" />
                             <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding Role}" TextAlignment="Center" Margin="5"/>
                             <TextBlock Text="{Binding Email}" TextAlignment="Center" Margin="5"/>
@@ -39,6 +39,7 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
 
             <ListView.ContextMenu>
                 <ContextMenu Name="contextMenu">

@@ -27,6 +27,7 @@ namespace Практическая_3.Models
         public string phone_number { get; set; }
         public string passport_number { get; set; }
         public string middle_name { get; set; }
+        public string photo_path { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Artists> Artists { get; set; }

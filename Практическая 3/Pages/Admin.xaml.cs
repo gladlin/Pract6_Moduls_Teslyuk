@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Практическая_3.Models;
 using Практическая_3.Services;
 
@@ -13,7 +15,9 @@ namespace Практическая_3.Pages
         public string Name { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
+        public string PicturePath { get; set; } // Хранит путь к изображению
     }
+
 
     public partial class Admin : Page
     {
@@ -41,6 +45,7 @@ namespace Практическая_3.Pages
                 string userSurname;
                 string userMiddlename;
                 string role;
+                string photo_path;
 
                 if (user.role_id == 1)
                 {
@@ -49,6 +54,7 @@ namespace Практическая_3.Pages
                     userName = admin.first_name;
                     userSurname = admin.last_name;
                     userMiddlename = admin.middle_name;
+                    photo_path = admin.photo_path;
                     role = "Admin";
                 }
                 else if (user.role_id == 2)
@@ -58,6 +64,7 @@ namespace Практическая_3.Pages
                     userName = producer.first_name;
                     userSurname = producer.last_name;
                     userMiddlename = producer.middle_name;
+                    photo_path = producer.photo_path;
                     role = "Producer";
                 }
                 else
@@ -67,15 +74,17 @@ namespace Практическая_3.Pages
                     userName = artist.first_name;
                     userSurname = artist.last_name;
                     userMiddlename = artist.middle_name;
+                    photo_path = artist.photo_path;
                     role = "Artist";
                 }
-
                 userStruct userStruct = new userStruct
                 {
                     Name = $"{userName} {userSurname} {userMiddlename}",
                     Role = role,
-                    Email = user.email
+                    Email = user.email,
+                    PicturePath = photo_path,
                 };
+
 
                 userList.Add(userStruct);
             }
@@ -111,8 +120,8 @@ namespace Практическая_3.Pages
 
         private void btnSeeUser_Click(object sender,RoutedEventArgs e)
         {
-            object user = LViewProduct.SelectedItem.ToString();
-            //NavigationService.Navigate(new SeeUserDetail(selectedItem));
+            //object user = LViewProduct.SelectedItem.ToString();
+            //NavigationService.Navigate(new SeeUserDetail(user));
             //надо как-то найти способ узнать выбранный элемент
         }
     }

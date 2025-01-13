@@ -14,6 +14,7 @@
           <Property Name="first_name" Type="char" MaxLength="24" Nullable="false" />
           <Property Name="last_name" Type="char" MaxLength="24" Nullable="false" />
           <Property Name="middle_name" Type="nchar" MaxLength="20" />
+          <Property Name="photo_path" Type="nchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="AlbumPreliminaryMeetings">
           <Key>
@@ -52,9 +53,10 @@
           <Property Name="producer_id" Type="int" Nullable="false" />
           <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="phone_number" Type="nvarchar" MaxLength="20" />
-          <Property Name="passport_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="passport_number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="middle_name" Type="char" MaxLength="24" />
+          <Property Name="photo_path" Type="nchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractsWithManufacturers">
           <Key>
@@ -105,9 +107,10 @@
           <Property Name="account_id" Type="int" Nullable="false" />
           <Property Name="first_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="phone_number" Type="nvarchar" MaxLength="20" />
-          <Property Name="passport_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="passport_number" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="middle_name" Type="nchar" MaxLength="50" />
+          <Property Name="photo_path" Type="nchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductionRequests">
           <Key>
@@ -608,14 +611,15 @@
           <Property Name="producer_id" Type="Int32" Nullable="false" />
           <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="passport_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AlbumRequests" Relationship="Self.FK__AlbumRequ__artis__6477ECF3" FromRole="Artists" ToRole="AlbumRequests" />
           <NavigationProperty Name="Albums" Relationship="Self.FK__Albums__artist_i__6A30C649" FromRole="Artists" ToRole="Albums" />
           <NavigationProperty Name="UserAccounts" Relationship="Self.FK__Artists__account__5812160E" FromRole="Artists" ToRole="UserAccounts" />
           <NavigationProperty Name="Producers" Relationship="Self.FK__Artists__produce__59063A47" FromRole="Artists" ToRole="Producers" />
           <NavigationProperty Name="RoomSchedules" Relationship="Self.FK__RoomSched__artis__619B8048" FromRole="Artists" ToRole="RoomSchedules" />
           <Property Name="middle_name" Type="String" MaxLength="24" FixedLength="true" Unicode="false" />
+          <Property Name="photo_path" Type="String" MaxLength="64" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractsWithManufacturers">
           <Key>
@@ -671,11 +675,12 @@
           <Property Name="account_id" Type="Int32" Nullable="false" />
           <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="passport_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="passport_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Artists" Relationship="Self.FK__Artists__produce__59063A47" FromRole="Producers" ToRole="Artists" />
           <NavigationProperty Name="UserAccounts" Relationship="Self.FK__Producers__accou__5535A963" FromRole="Producers" ToRole="UserAccounts" />
           <Property Name="middle_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="photo_path" Type="String" MaxLength="64" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductionRequests">
           <Key>
@@ -1144,6 +1149,7 @@
           <Property Name="last_name" Type="String" Nullable="false" MaxLength="24" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="UserAccounts" Relationship="MusicRecordModel.FK_Admins_UserAccounts" FromRole="Admins" ToRole="UserAccounts" />
           <Property Name="middle_name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="photo_path" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_Admins_UserAccounts">
           <End Type="MusicRecordModel.UserAccounts" Role="UserAccounts" Multiplicity="1" />
@@ -1197,6 +1203,7 @@
           <EntitySetMapping Name="Artists">
             <EntityTypeMapping TypeName="MusicRecordModel.Artists">
               <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="photo_path" ColumnName="photo_path" />
                 <ScalarProperty Name="middle_name" ColumnName="middle_name" />
                 <ScalarProperty Name="artist_id" ColumnName="artist_id" />
                 <ScalarProperty Name="account_id" ColumnName="account_id" />
@@ -1256,6 +1263,7 @@
           <EntitySetMapping Name="Producers">
             <EntityTypeMapping TypeName="MusicRecordModel.Producers">
               <MappingFragment StoreEntitySet="Producers">
+                <ScalarProperty Name="photo_path" ColumnName="photo_path" />
                 <ScalarProperty Name="middle_name" ColumnName="middle_name" />
                 <ScalarProperty Name="producer_id" ColumnName="producer_id" />
                 <ScalarProperty Name="account_id" ColumnName="account_id" />
@@ -1387,6 +1395,7 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="MusicRecordModel.Admins">
               <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="photo_path" ColumnName="photo_path" />
                 <ScalarProperty Name="middle_name" ColumnName="middle_name" />
                 <ScalarProperty Name="last_name" ColumnName="last_name" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
