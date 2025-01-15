@@ -21,6 +21,7 @@
                 <ComboBoxItem Content="Продюсер" />
                 <ComboBoxItem Content="Артист" />
             </ComboBox>
+            <Button x:Name="btnResetFilters" Content="Сбросить фильтры" Click="btnResetFilters_Click" Height="32" Width="144"/>
         </StackPanel>
 
         <ListView Name="LViewProduct" Grid.Column="0" Grid.ColumnSpan="1"

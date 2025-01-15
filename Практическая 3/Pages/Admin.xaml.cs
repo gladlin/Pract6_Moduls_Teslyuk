@@ -132,10 +132,12 @@ namespace Практическая_3.Pages
         {
             userListSearch.Clear();
 
+            string selectedRole = (cbRole.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
             foreach (var user in userList)
             {
                 bool matchesSearch = string.IsNullOrEmpty(tbSearchSurname.Text) || user.Name.Split(' ')[1].Contains(tbSearchSurname.Text);
-                bool matchesRole = string.IsNullOrEmpty(cbRole.Text) || cbRole.Text == user.Role;
+                bool matchesRole = string.IsNullOrEmpty(selectedRole) || selectedRole == user.Role;
 
                 if (matchesSearch && matchesRole)
                 {
@@ -151,6 +153,13 @@ namespace Практическая_3.Pages
 
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ChangeListUsers();
+        }
+
+        private void btnResetFilters_Click(object sender, RoutedEventArgs e)
+        {
+            tbSearchSurname.Text = "";
+            cbRole.SelectedIndex = -1;
             ChangeListUsers();
         }
     }
