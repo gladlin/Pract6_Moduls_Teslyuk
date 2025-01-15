@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Практическая_3.Models;
 using Практическая_3.Services;
 
@@ -15,24 +13,26 @@ namespace Практическая_3.Pages
         public string Name { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
-        public string PicturePath { get; set; } // Хранит путь к изображению
+        public string PicturePath { get; set; }
     }
-
-
+    
     public partial class Admin : Page
     {
-        private List<userStruct> userList;
+        private ObservableCollection<userStruct> userList;
+        private ObservableCollection<userStruct> userListSearch;
 
         public Admin(UserAccounts user, string userName, string userSurname)
         {
             InitializeComponent();
             printGreeting(userName, userSurname);
 
-            userList = new List<userStruct>();
+            userList = new ObservableCollection<userStruct>();
+            userListSearch = new ObservableCollection<userStruct>();
             GetAllUsers();
 
-            LViewProduct.ItemsSource = userList;
+            LViewProduct.ItemsSource = userListSearch;
         }
+
 
         private void GetAllUsers()
         {
@@ -55,7 +55,7 @@ namespace Практическая_3.Pages
                     userSurname = admin.last_name;
                     userMiddlename = admin.middle_name;
                     photo_path = admin.photo_path;
-                    role = "Admin";
+                    role = "Админ";
                 }
                 else if (user.role_id == 2)
                 {
@@ -65,7 +65,7 @@ namespace Практическая_3.Pages
                     userSurname = producer.last_name;
                     userMiddlename = producer.middle_name;
                     photo_path = producer.photo_path;
-                    role = "Producer";
+                    role = "Продюсер";
                 }
                 else
                 {
@@ -75,8 +75,9 @@ namespace Практическая_3.Pages
                     userSurname = artist.last_name;
                     userMiddlename = artist.middle_name;
                     photo_path = artist.photo_path;
-                    role = "Artist";
+                    role = "Артист";
                 }
+
                 userStruct userStruct = new userStruct
                 {
                     Name = $"{userName} {userSurname} {userMiddlename}",
@@ -85,9 +86,10 @@ namespace Практическая_3.Pages
                     PicturePath = photo_path,
                 };
 
-
                 userList.Add(userStruct);
             }
+
+            userListSearch = new ObservableCollection<userStruct>(userList);
         }
 
         private void printGreeting(string userName, string userSurname)
@@ -113,16 +115,43 @@ namespace Практическая_3.Pages
             tbUserName.Text = $"{userSurname} {userName}";
         }
 
-        private void LViewProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnSeeUser_Click(object sender, RoutedEventArgs e)
         {
-
+            if (LViewProduct.SelectedItem is userStruct selectedUser)
+            {
+                NavigationService.Navigate(new SeeUserDetail(selectedUser));
+            }
         }
 
-        private void btnSeeUser_Click(object sender,RoutedEventArgs e)
+        private void tbSearchSurname_Changed(object sender, EventArgs e)
         {
-            //object user = LViewProduct.SelectedItem.ToString();
-            //NavigationService.Navigate(new SeeUserDetail(user));
-            //надо как-то найти способ узнать выбранный элемент
+            ChangeListUsers();
+        }
+
+        private void ChangeListUsers()
+        {
+            userListSearch.Clear();
+
+            foreach (var user in userList)
+            {
+                bool matchesSearch = string.IsNullOrEmpty(tbSearchSurname.Text) || user.Name.Split(' ')[1].Contains(tbSearchSurname.Text);
+                bool matchesRole = string.IsNullOrEmpty(cbRole.Text) || cbRole.Text == user.Role;
+
+                if (matchesSearch && matchesRole)
+                {
+                    userListSearch.Add(user);
+                }
+            }
+        }
+
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddUser());
+        }
+
+        private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangeListUsers();
         }
     }
 }

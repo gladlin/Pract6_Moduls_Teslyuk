@@ -10,11 +10,21 @@
 
     <Grid>
         <TextBlock Text="Admin's Page" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Margin="0,13,0,0"/>
-        <TextBlock x:Name="tbGreeting" HorizontalAlignment="Left" Margin="646,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
-        <TextBlock x:Name="tbUserName" HorizontalAlignment="Left" Margin="646,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
+        <TextBlock x:Name="tbGreeting" HorizontalAlignment="Right" Margin="646,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
+        <TextBlock x:Name="tbUserName" HorizontalAlignment="Right" Margin="646,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="DarkGreen" Width="136"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,60,0,0">
+            <TextBlock Text="Поиск по фамилии "/>
+            <TextBox x:Name="tbSearchSurname" Width="200" Height="30" Margin="5" TextChanged="tbSearchSurname_Changed"/>
+            <ComboBox x:Name="cbRole" Width="150" Height="30" Margin="5" SelectionChanged="cbRole_SelectionChanged">
+                <ComboBoxItem Content="Админ" />
+                <ComboBoxItem Content="Продюсер" />
+                <ComboBoxItem Content="Артист" />
+            </ComboBox>
+        </StackPanel>
 
         <ListView Name="LViewProduct" Grid.Column="0" Grid.ColumnSpan="1"
-                  Grid.Row="0" Margin="5,5,-187,-239" d:ItemsSource="{d:SampleData}" SelectionChanged="LViewProduct_SelectionChanged">
+                  Grid.Row="0" Margin="5,100,5,100" d:ItemsSource="{d:SampleData}" >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" />
@@ -40,7 +50,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
 
-
             <ListView.ContextMenu>
                 <ContextMenu Name="contextMenu">
                     <MenuItem Name="btnSeeUser" Header="Перейти к пользователю"
@@ -48,5 +57,8 @@
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
+
+        <Button x:Name="btnAddUser" Content="Добавить пользователя" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                Margin="0,727,0,0" Width="222" Height="43" Click="btnAddUser_Click"/>
     </Grid>
 </Page>
