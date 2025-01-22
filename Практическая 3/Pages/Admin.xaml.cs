@@ -119,7 +119,7 @@ namespace Практическая_3.Pages
         {
             if (LViewProduct.SelectedItem is userStruct selectedUser)
             {
-                NavigationService.Navigate(new SeeUserDetail(selectedUser));
+                NavigationService.Navigate(new SeeUserDetail(selectedUser, userList));
             }
         }
 

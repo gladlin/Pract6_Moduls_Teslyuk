@@ -27,8 +27,6 @@ namespace Практическая_3.Models
         [StringLength(24, MinimumLength = 1)]
         public string last_name { get; set; }
 
-        [Required(ErrorMessage = "Длина должна быть не более 20 символов")]
-        [StringLength(20, MinimumLength = 1)]
         public string middle_name { get; set; }
 
         [Required(ErrorMessage = "Длина должна быть не более 64 символов")]

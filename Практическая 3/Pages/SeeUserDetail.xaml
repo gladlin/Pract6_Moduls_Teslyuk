@@ -14,9 +14,9 @@
         <TextBlock x:Name="tblMiddleName" HorizontalAlignment="Left" Margin="175,155,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top"/>
         <TextBlock x:Name="tblEmail" HorizontalAlignment="Left" Margin="175,198,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
         <TextBlock x:Name="tblRole" HorizontalAlignment="Left" Margin="175,240,0,0" TextWrapping="Wrap" Text="Роль" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblLogin" HorizontalAlignment="Left" Margin="175,279,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblPassword" HorizontalAlignment="Left" Margin="175,319,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbSurname" HorizontalAlignment="Left" Margin="278,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" RenderTransformOrigin="0.5,0.5">
+        <TextBlock x:Name="tblLogin" HorizontalAlignment="Left" Margin="176,281,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblPassword" HorizontalAlignment="Left" Margin="177,319,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbSurname" HorizontalAlignment="Left" Margin="278,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -31,15 +31,12 @@
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Margin="280,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
         <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Margin="280,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
         <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="280,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Margin="280,232,0,0" VerticalAlignment="Top" Width="207" Height="28">
-            <ListBoxItem Content="Админ"/>
-            <ListBoxItem Content="Продюсер"/>
-            <ListBoxItem Content="Артист"/>
-        </ComboBox>
-        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="276,361,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
-        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="400,362,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="btnClear_Click"/>
+
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="243,380,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
+        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="400,380,0,0" VerticalAlignment="Top" Height="33" Width="87" Click="btnClear_Click"/>
         <Image x:Name="imgUser" HorizontalAlignment="Left" Height="150" Margin="569,74,0,0" VerticalAlignment="Top" Width="143" />
         <Button x:Name="btnAddPhoto" Content="Добавить фото" HorizontalAlignment="Left" Margin="585,250,0,0" VerticalAlignment="Top" Click="btnAddPhoto_Click"/>
+        <TextBox x:Name="tbRole" HorizontalAlignment="Left" Margin="280,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" TextChanged="TextBox_TextChanged"/>
 
     </Grid>
 </Page>

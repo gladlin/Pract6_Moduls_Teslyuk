@@ -55,6 +55,7 @@ namespace Практическая_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Albums> Albums { get; set; }
         public virtual UserAccounts UserAccounts { get; set; }
+
         public virtual Producers Producers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoomSchedules> RoomSchedules { get; set; }

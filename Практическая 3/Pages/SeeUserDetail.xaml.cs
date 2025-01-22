@@ -1,4 +1,8 @@
 ﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -15,20 +19,20 @@ namespace Практическая_3.Pages
         private userStruct currentUser;
         private string newPhotoPath;
 
-        public SeeUserDetail(userStruct user)
+        public SeeUserDetail(userStruct user, ObservableCollection<userStruct> userList)
         {
             InitializeComponent();
             currentUser = user;
-            fillAllData(user);
+            fillAllData(user, userList);
         }
 
-        private void fillAllData(userStruct user)
+        private void fillAllData(userStruct user, ObservableCollection<userStruct> userList)
         {
             tbSurname.Text = user.Name.Split(' ')[1];
             tbFirstname.Text = user.Name.Split(' ')[0];
             tbMiddleName.Text = user.Name.Split(' ')[2];
             tbEmail.Text = user.Email;
-            cbRole.Text = user.Role.ToString();
+            tbRole.Text = user.Role.ToString();
 
             var db = Helper.GetContext();
             var userdb = db.UserAccounts.FirstOrDefault(x => x.email == user.Email);
@@ -43,7 +47,7 @@ namespace Практическая_3.Pages
             tbFirstname.Text = "";
             tbMiddleName.Text = "";
             tbEmail.Text = "";
-            cbRole.Text = "";
+            tbRole.Text = "";
             tbLogin.Text = "";
             tbPassword.Text = "";
             imgUser.Source = null;
@@ -52,71 +56,113 @@ namespace Практическая_3.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbSurname.Text) || string.IsNullOrEmpty(tbFirstname.Text) ||
-                string.IsNullOrEmpty(tbMiddleName.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
-                string.IsNullOrEmpty(cbRole.Text) || string.IsNullOrEmpty(tbLogin.Text) ||
-                string.IsNullOrEmpty(tbPassword.Text))
+
+        var db = Helper.GetContext();
+        var userdb = db.UserAccounts.FirstOrDefault(x => x.email == currentUser.Email);
+           
+        if (userdb != null)
+        {
+            userdb.username = tbLogin.Text;
+            userdb.password = tbPassword.Text;
+            userdb.email = tbEmail.Text;
+            var context = new ValidationContext(userdb);
+            var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+            if(!Validator.TryValidateObject(userdb, context, results, true))
             {
-                MessageBox.Show("Заполните все обязательные поля!");
-                return;
+                foreach (var reason in results)
+                    MessageBox.Show($"{reason}");
+                    return;
+             }
+
+            if (userdb.role_id == 1)
+            {
+                var admin = db.Admins.FirstOrDefault(x => x.account_id == userdb.account_id);
+                    
+                if (admin != null)
+                {
+                    admin.first_name = tbFirstname.Text;
+                    admin.last_name = tbSurname.Text;
+                    admin.middle_name = tbMiddleName.Text;
+                    admin.photo_path = newPhotoPath ?? admin.photo_path;
+                    context = new ValidationContext(admin);
+                    var results1 = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+                    if (Validator.TryValidateObject(admin, context, results1, true))
+                    {
+                        db.SaveChanges();
+                        MessageBox.Show("Пользователь сохранен");
+                        return;
+                    }
+                    else
+                    {
+                        foreach (var reason in results1)
+                            MessageBox.Show($"{reason}");
+                    }
+                }
+                else
+                    MessageBox.Show("Не получилось обновить пользователя");
+
             }
-
-            var db = Helper.GetContext();
-            var userdb = db.UserAccounts.FirstOrDefault(x => x.email == currentUser.Email);
-            if (userdb != null)
+            else if (userdb.role_id == 2)
             {
-                userdb.username = tbLogin.Text;
-                userdb.password = tbPassword.Text;
-                userdb.email = tbEmail.Text;
+                var producer = db.Producers.FirstOrDefault(x => x.account_id == userdb.account_id);
+                    
 
-                if (cbRole.Text == "Админ")
+                if (producer != null)
                 {
-                    var admin = db.Admins.FirstOrDefault(x => x.account_id == userdb.account_id);
-                    if (admin != null)
+                    producer.first_name = tbFirstname.Text;
+                    producer.last_name = tbSurname.Text;
+                    producer.middle_name = tbMiddleName.Text;
+                    producer.photo_path = newPhotoPath ?? producer.photo_path;
+                    context = new ValidationContext(producer);
+                    var results1 = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+                    if (Validator.TryValidateObject(producer, context, results1, true))
                     {
-                        admin.first_name = tbFirstname.Text;
-                        admin.last_name = tbSurname.Text;
-                        admin.middle_name = tbMiddleName.Text;
-                        admin.photo_path = newPhotoPath ?? admin.photo_path;
+                        db.SaveChanges();
+                        MessageBox.Show("Пользователь сохранен");
+                        return;
+                    }
+                    else
+                    {
+                        foreach (var reason in results1)
+                            MessageBox.Show($"{reason}");
                     }
                 }
-                else if (cbRole.Text == "Продюсер")
+                else
+                        MessageBox.Show("Не получилось обновить пользователя");
+                }
+                
+            else if (userdb.role_id == 3)
+            {
+                var artist = db.Artists.FirstOrDefault(x => x.account_id == userdb.account_id);
+                if (artist != null)
                 {
-                    var producer = db.Producers.FirstOrDefault(x => x.account_id == userdb.account_id);
-                    if (producer != null)
+                    artist.first_name = tbFirstname.Text;
+                    artist.last_name = tbSurname.Text;
+                    artist.middle_name = tbMiddleName.Text;
+                    artist.photo_path = newPhotoPath ?? artist.photo_path;
+                    context = new ValidationContext(artist);
+                    var results1 = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+                    if (Validator.TryValidateObject(artist, context, results1, true))
                     {
-                        producer.first_name = tbFirstname.Text;
-                        producer.last_name = tbSurname.Text;
-                        producer.middle_name = tbMiddleName.Text;
-                        producer.photo_path = newPhotoPath ?? producer.photo_path;
+                        db.SaveChanges();
+                        MessageBox.Show("Пользователь сохранен");
+                        return;
+                    }
+                    else
+                    {
+                        foreach (var reason in results1)
+                            MessageBox.Show($"{reason}");
                     }
                 }
-                else if (cbRole.Text == "Артист")
-                {
-                    var artist = db.Artists.FirstOrDefault(x => x.account_id == userdb.account_id);
-                    if (artist != null)
-                    {
-                        artist.first_name = tbFirstname.Text;
-                        artist.last_name = tbSurname.Text;
-                        artist.middle_name = tbMiddleName.Text;
-                        artist.photo_path = newPhotoPath ?? artist.photo_path;
-                    }
-                }
-
-                try
-                {
-                    db.SaveChanges();
-                    MessageBox.Show("Данные успешно сохранены!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
-                }
+                else
+                    MessageBox.Show("Не получилось создать пользователя");
+            }
             }
         }
+          
 
         private void btnAddPhoto_Click(object sender, RoutedEventArgs e)
-        {
+    {
             var dialog = new OpenFileDialog();
             dialog.Filter = "Image Files (*.png; *.jpg; *.jpeg)|*.png;*.jpg;*.jpeg";
             dialog.DefaultExt = ".png";
@@ -144,6 +190,11 @@ namespace Практическая_3.Pages
                     MessageBox.Show("Файл не найден!");
                 }
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

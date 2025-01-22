@@ -40,14 +40,6 @@ namespace Практическая_3.Pages
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbSurname.Text) || string.IsNullOrEmpty(tbFirstname.Text) ||
-                string.IsNullOrEmpty(tbMiddleName.Text) || string.IsNullOrEmpty(tbEmail.Text) ||
-                string.IsNullOrEmpty(cbRole.Text) || string.IsNullOrEmpty(tbLogin.Text) ||
-                string.IsNullOrEmpty(tbPassword.Text))
-            {
-                MessageBox.Show("Заполните все обязательные поля!");
-                return;
-            }
             var db = Helper.GetContext();
             int maxId = db.UserAccounts.OrderByDescending(u => u.account_id).First().account_id + 1;
             var newUser = new UserAccounts
@@ -64,41 +56,45 @@ namespace Практическая_3.Pages
             if (!Validator.TryValidateObject(newUser, context, (ICollection<System.ComponentModel.DataAnnotations.ValidationResult>)results, true))
             {
                 MessageBox.Show("Не получилось создать пользователя, введите корретные данные");
-                return
+                return;
             }
             db.UserAccounts.Add(newUser);
             db.SaveChanges();
             int IdInRole;
             int isCreated = 0;
+
             switch (cbRole.Text)
             {
                 case "Админ":
                     IdInRole = db.Admins.OrderByDescending(u => u.admin_id).First().admin_id + 1;
-                    var admin = AddAdmin(maxId, IdInRole);
+                    var admin = AddAdmin(maxId, IdInRole, tbFirstname.Text, tbSurname.Text, tbMiddleName.Text, PhotoPath);
                     if (admin != null)
                     {
                         db.Admins.Add(admin);
                         isCreated = 1;
                     }
+                   
                     break;
                 case "Продюсер":
                     IdInRole = db.Producers.OrderByDescending(u => u.producer_id).First().producer_id + 1;
-                    var producer = AddProducer(maxId, IdInRole);
+                    var producer = AddProducer(maxId, IdInRole, tbFirstname.Text, tbSurname.Text, tbMiddleName.Text, PhotoPath, tbPhoneNumber.Text, tbPassport.Text);
                     if (producer != null)
                     { 
                         db.Producers.Add(producer);
                         isCreated = 1;
                     }
+              
                     break;
                 case "Артист":
                     IdInRole = db.Artists.OrderByDescending(u => u.artist_id).First().artist_id + 1;
-                    var artist = AddArtist(maxId, IdInRole);
+                    var artist = AddArtist(maxId, IdInRole, tbFirstname.Text, tbSurname.Text, tbMiddleName.Text, PhotoPath, cbProducer.SelectedIndex + 1, tbPhoneNumber.Text, tbPassport.Text);
+                   
                     if (artist != null)
                     { 
                         db.Artists.Add(artist);
                         isCreated = 1;
                      }
-                     break;
+                    break;
                 default:
                     MessageBox.Show("Неверная роль!");
                     return;
@@ -115,19 +111,14 @@ namespace Практическая_3.Pages
             }
         }
 
-        private Admins AddAdmin(int maxId, int IdInRole)
+        public static Admins AddAdmin(int maxId, int IdInRole, string firstName, string lastName, string middleName, string photoPath)
         {
-            if (string.IsNullOrEmpty(tbPassport.Text) || string.IsNullOrEmpty(tbPhoneNumber.Text))
-            {
-                MessageBox.Show("Заполните все обязательные поля!");
-                return null;
-            }
             var admin = new Admins
             {
-                first_name = tbFirstname.Text,
-                last_name = tbSurname.Text,
-                middle_name = tbMiddleName.Text,
-                photo_path = PhotoPath,
+                first_name = firstName,
+                last_name = lastName,
+                middle_name = middleName,
+                photo_path = photoPath,
                 admin_id = IdInRole,
                 account_id = maxId,
             };
@@ -137,29 +128,24 @@ namespace Практическая_3.Pages
                 return admin;
             else
             {
-                MessageBox.Show($"Ошибка при сохранении пользователя: {results}");
+                MessageBox.Show("Не получилось создать администратора, введите корретные данные");
                 return null;
             }
         }
 
-        private Artists AddArtist(int maxId, int IdInRole)
+        public static Artists AddArtist(int maxId, int IdInRole, string firstName, string lastName, string middleName, string photoPath, int producerId, string phoneNumber, string passportNumber)
         {
-            if (string.IsNullOrEmpty(tbPassport.Text) || string.IsNullOrEmpty(tbPhoneNumber.Text))
-            {
-                MessageBox.Show("Заполните все обязательные поля!");
-                return null;
-            }
             var artist = new Artists
             {
-                first_name = tbFirstname.Text,
-                last_name = tbSurname.Text,
-                middle_name = tbMiddleName.Text,
-                photo_path = PhotoPath,
+                first_name = firstName,
+                last_name = lastName,
+                middle_name = middleName,
+                photo_path = photoPath,
                 artist_id = IdInRole,
                 account_id = maxId,
-                producer_id = cbProducer.SelectedIndex + 1,
-                phone_number = tbPhoneNumber.Text,
-                passport_number = tbPassport.Text
+                producer_id = producerId,
+                phone_number = phoneNumber,
+                passport_number = passportNumber
             };
             var context = new ValidationContext(artist);
             var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
@@ -167,28 +153,23 @@ namespace Практическая_3.Pages
                 return artist;
             else
             {
-                MessageBox.Show($"Ошибка при сохранении пользователя: {results}");
+                MessageBox.Show("Не получилось создать артиста, введите корретные данные");
                 return null;
             }
         }
 
-        private Producers AddProducer(int maxId, int IdInRole)
+        public static Producers AddProducer(int maxId, int IdInRole, string firstName, string lastName, string middleName, string photoPath, string phoneNumber, string passportNumber)
         {
-            if (string.IsNullOrEmpty(tbPassport.Text) || string.IsNullOrEmpty(tbPhoneNumber.Text))
-            {
-                MessageBox.Show("Заполните все обязательные поля!");
-                return null;
-            }
             var producer = new Producers
             {
-                first_name = tbFirstname.Text,
-                last_name = tbSurname.Text,
-                middle_name = tbMiddleName.Text,
-                photo_path = PhotoPath,
+                first_name = firstName,
+                last_name = lastName,
+                middle_name = middleName,
+                photo_path = photoPath,
                 account_id = maxId,
-                producer_id= IdInRole,
-                phone_number = tbPhoneNumber.Text,
-                passport_number = tbPassport.Text,
+                producer_id = IdInRole,
+                phone_number = phoneNumber,
+                passport_number = passportNumber,
             };
 
             var context = new ValidationContext(producer);
@@ -197,7 +178,7 @@ namespace Практическая_3.Pages
                 return producer;
             else
             {
-                MessageBox.Show($"Ошибка при сохранении пользователя: {results}");
+                MessageBox.Show("Не получилось создать продюссера, введите корретные данные");
                 return null;
             }
         }
