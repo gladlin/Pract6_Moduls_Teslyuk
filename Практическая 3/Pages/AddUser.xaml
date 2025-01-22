@@ -5,18 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Практическая_3.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="AddUser">
 
     <Grid>
-        <TextBlock x:Name="tblSurname" HorizontalAlignment="Left" Margin="175,74,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblName" HorizontalAlignment="Left" Margin="175,114,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblMiddleName" HorizontalAlignment="Left" Margin="175,155,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblEmail" HorizontalAlignment="Left" Margin="175,198,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblRole" HorizontalAlignment="Left" Margin="175,240,0,0" TextWrapping="Wrap" Text="Роль" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblLogin" HorizontalAlignment="Left" Margin="175,279,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
-        <TextBlock x:Name="tblPassword" HorizontalAlignment="Left" Margin="175,319,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbSurname" HorizontalAlignment="Left" Margin="278,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" RenderTransformOrigin="0.5,0.5">
+        <TextBlock x:Name="tblSurname" HorizontalAlignment="Left" Margin="193,68,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblName" HorizontalAlignment="Left" Margin="225,108,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblMiddleName" HorizontalAlignment="Left" Margin="191,148,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblEmail" HorizontalAlignment="Left" Margin="218,192,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblRole" HorizontalAlignment="Left" Margin="221,233,0,0" TextWrapping="Wrap" Text="Роль" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblLogin" HorizontalAlignment="Left" Margin="211,272,0,0" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblPassword" HorizontalAlignment="Left" Margin="201,312,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbSurname" HorizontalAlignment="Left" Margin="285,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -26,20 +26,26 @@
                 </TransformGroup>
             </TextBox.RenderTransform>
         </TextBox>
-        <TextBox x:Name="tbFirstname" HorizontalAlignment="Left" Margin="280,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <TextBox x:Name="tbMiddleName" HorizontalAlignment="Left" Margin="280,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Margin="280,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Margin="280,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="280,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
-        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Margin="280,232,0,0" VerticalAlignment="Top" Width="207" Height="28">
+        <TextBox x:Name="tbFirstname" HorizontalAlignment="Left" Margin="287,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbMiddleName" HorizontalAlignment="Left" Margin="287,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Margin="287,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Margin="287,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="287,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Margin="287,225,0,0" VerticalAlignment="Top" Width="207" Height="28" SelectionChanged="cbRole_SelectionChanged">
             <ListBoxItem Content="Админ"/>
             <ListBoxItem Content="Продюсер"/>
             <ListBoxItem Content="Артист"/>
         </ComboBox>
-        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="276,361,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
-        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="400,362,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="btnClear_Click"/>
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="275,485,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
+        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="399,486,0,0" VerticalAlignment="Top" Height="31" Width="87" Click="btnClear_Click"/>
         <Image x:Name="imgUser" HorizontalAlignment="Left" Height="150" Margin="569,74,0,0" VerticalAlignment="Top" Width="143" />
         <Button x:Name="btnAddPhoto" Content="Добавить фото" HorizontalAlignment="Left" Margin="585,250,0,0" VerticalAlignment="Top" Click="btnAddPhoto_Click"/>
+        <TextBlock x:Name="tblPassport" HorizontalAlignment="Left" Margin="198,351,0,0" TextWrapping="Wrap" Text="Паспорт" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPassport" HorizontalAlignment="Left" Margin="287,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbPhoneNumber" HorizontalAlignment="Left" Margin="287,389,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207"/>
+        <TextBlock x:Name="tblPhoneNumber" HorizontalAlignment="Left" Margin="146,389,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblProducer" HorizontalAlignment="Left" Margin="184,430,0,0" TextWrapping="Wrap" Text="Продюссер" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbProducer" HorizontalAlignment="Left" Margin="287,426,0,0" VerticalAlignment="Top" Width="207" Height="28"/>
 
     </Grid>
 </Page>

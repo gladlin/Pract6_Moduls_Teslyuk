@@ -18,8 +18,8 @@ namespace Практическая_3.Pages
     
     public partial class Admin : Page
     {
-        private ObservableCollection<userStruct> userList;
-        private ObservableCollection<userStruct> userListSearch;
+        public ObservableCollection<userStruct> userList;
+        public ObservableCollection<userStruct> userListSearch;
 
         public Admin(UserAccounts user, string userName, string userSurname)
         {
@@ -148,7 +148,7 @@ namespace Практическая_3.Pages
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddUser());
+            NavigationService.Navigate(new AddUser(userList));
         }
 
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -6,7 +6,7 @@
 //     Изменения, вносимые в этот файл вручную, будут перезаписаны при повторном создании кода.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+using System.ComponentModel.DataAnnotations;
 namespace Практическая_3.Models
 {
     using System;
@@ -23,9 +23,21 @@ namespace Практическая_3.Models
         }
     
         public int account_id { get; set; }
+
+        [Required(ErrorMessage = "Длина должна быть не более 50 символов")]
+        [StringLength(50, MinimumLength = 1)]
         public string username { get; set; }
+
+        [Required(ErrorMessage = "Длина должна быть не более 64 символов")]
+        [StringLength(64, MinimumLength = 1)]
         public string password { get; set; }
+
+        [Required(ErrorMessage = "Длина должна быть не более 100 символов")]
+        [StringLength(100, MinimumLength = 1)]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "Всего есть 3 роли")]
+        [Range(1, 3)]
         public int role_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
