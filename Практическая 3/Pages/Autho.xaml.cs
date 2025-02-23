@@ -16,6 +16,7 @@ namespace Практическая_3.Pages
         MusicRecordEntities db = Helper.GetContext();
         private string userName = null;
         private string userSurname = null;
+        private int specialID = 0;
 
         public Autho()
         {
@@ -48,18 +49,21 @@ namespace Практическая_3.Pages
              if (role == 1)
              {
                  var admin = db.Admins.FirstOrDefault(x => x.account_id == user.account_id);
+                 specialID = admin.admin_id;
                  userName = admin.first_name;
                  userSurname = admin.last_name;
              }
              else if (role == 2)
              {
                  var producer = db.Producers.FirstOrDefault(x => x.account_id == user.account_id);
+                 specialID = producer.producer_id;
                  userName = producer.first_name;
                  userSurname = producer.last_name;
              }
             else if (role == 3)
             {
                 var artist = db.Artists.FirstOrDefault(x => x.account_id == user.account_id);
+                specialID = artist.artist_id;
                 userName = artist.first_name;
                 userSurname = artist.last_name;
             }
@@ -70,7 +74,11 @@ namespace Практическая_3.Pages
             click++;
             string login = tbLogin.Text.Trim();
             string password = Hash.HashPassword(tbPassword.Password.Trim());
-            var user = db.UserAccounts.FirstOrDefault(x => x.username == login && x.password == password);
+            var user = db.UserAccounts.FirstOrDefault(x => x.username == login && x.password == password); 
+            /*  поиск первой попавшейся записи в таблице "UserAccounts", у которой в поле "username" значение равно в переменной login,
+                а также значение в поле "password" у записи равно значению в переменной password
+                Если нет записи, подходящей под условие, то возвращается значение null
+             */
 
             if (click <= 1)
             {
@@ -123,6 +131,9 @@ namespace Практическая_3.Pages
 
         private int remainingSeconds = 10;
         private DispatcherTimer timer;
+
+        // Таймер ожидания, из-за неверной введенной капчи
+        // Не дает пользователю действовать с системой, дод тех пор пока не закончится таймер
         private void StartTimer()
         {
             remainingSeconds = 10;
@@ -187,8 +198,10 @@ namespace Практическая_3.Pages
                         NavigationService.Navigate(new Admin(user, userName, userSurname));
                         break;
                     case 2:
-                    case 3:
                         NavigationService.Navigate(new Client(user, userName, userSurname));
+                        break;
+                    case 3:
+                        NavigationService.Navigate(new Albums(specialID));
                         break;
                     default:
                         MessageBox.Show("Неизвестная роль пользователя.");
@@ -198,9 +211,9 @@ namespace Практическая_3.Pages
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ForgotPassword());
         }
     }
 }

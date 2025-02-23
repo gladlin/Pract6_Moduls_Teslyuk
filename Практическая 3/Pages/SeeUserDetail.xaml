@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Практическая_3.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800"
       Title="SeeUserDetail" Background="White">
 
     <Grid>
@@ -31,12 +31,20 @@
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Margin="280,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
         <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Margin="280,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
         <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Margin="280,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207"/>
+        <TextBlock x:Name="tblPassport" HorizontalAlignment="Left" Margin="177,351,0,0" TextWrapping="Wrap" Text="Паспорт" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPassport" HorizontalAlignment="Left" Margin="280,351,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207"/>
+        <TextBox x:Name="tbPhoneNumber" HorizontalAlignment="Left" Margin="280,389,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207"/>
+        <TextBlock x:Name="tblPhoneNumber" HorizontalAlignment="Left" Margin="132,389,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
+        <TextBlock x:Name="tblProducer" HorizontalAlignment="Left" Margin="167,430,0,0" TextWrapping="Wrap" Text="Продюссер" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbProducer" HorizontalAlignment="Left" Margin="280,426,0,0" VerticalAlignment="Top" Width="207" Height="28"/>
 
-        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="243,380,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
-        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="400,380,0,0" VerticalAlignment="Top" Height="33" Width="87" Click="btnClear_Click"/>
+
+
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="227,476,0,0" VerticalAlignment="Top" Height="33" Width="90" Click="btnSave_Click"/>
+        <Button x:Name="btnClear" Content="Очистить" HorizontalAlignment="Left" Margin="384,476,0,0" VerticalAlignment="Top" Height="33" Width="103" Click="btnClear_Click"/>
         <Image x:Name="imgUser" HorizontalAlignment="Left" Height="150" Margin="569,74,0,0" VerticalAlignment="Top" Width="143" />
         <Button x:Name="btnAddPhoto" Content="Добавить фото" HorizontalAlignment="Left" Margin="585,250,0,0" VerticalAlignment="Top" Click="btnAddPhoto_Click"/>
-        <TextBox x:Name="tbRole" HorizontalAlignment="Left" Margin="280,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" TextChanged="TextBox_TextChanged"/>
-
+        <TextBlock x:Name="tbRole" HorizontalAlignment="Left" Margin="280,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+       
     </Grid>
 </Page>

@@ -32,7 +32,8 @@
             </StackPanel>
 
         </StackPanel>
-        <TextBox x:Name="tbLeftTime" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="Wrap" Text="Оставшееся время: " VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" BorderBrush="White"/>
+        <TextBox x:Name="tbLeftTime" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="Wrap" Text="Оставшееся время: " VerticalAlignment="Top" Width="120" BorderBrush="White"/>
         <TextBox x:Name="tbTimer" HorizontalAlignment="Left" Margin="130,245,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="48"  Foreground="Red" BorderBrush="White"/>
+        <Button x:Name="btnForgotPassword" Grid.Column="2" Content="Забыл пароль?" HorizontalAlignment="Center" Margin="0,241,0,0" VerticalAlignment="Top" Background="White" BorderBrush="White" Click="btnForgotPassword_Click"/>
     </Grid>
 </Page>

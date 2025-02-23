@@ -43,6 +43,7 @@
           <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="genre" Type="nvarchar" MaxLength="50" />
           <Property Name="release_date" Type="date" />
+          <Property Name="cover" Type="nvarchar" MaxLength="124" />
         </EntityType>
         <EntityType Name="Artists">
           <Key>
@@ -601,6 +602,7 @@
           <NavigationProperty Name="RevenueReports" Relationship="Self.FK__RevenueRe__album__04E4BC85" FromRole="Albums" ToRole="RevenueReports" />
           <NavigationProperty Name="Shipments" Relationship="Self.FK__Shipments__album__787EE5A0" FromRole="Albums" ToRole="Shipments" />
           <NavigationProperty Name="ContractsWithManufacturers" Relationship="Self.FK_ContractsWithManufacturers_Albums" FromRole="Albums" ToRole="ContractsWithManufacturers" />
+          <Property Name="cover" Type="String" MaxLength="124" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Artists">
           <Key>
@@ -1192,6 +1194,7 @@
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="MusicRecordModel.Albums">
               <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="cover" ColumnName="cover" />
                 <ScalarProperty Name="album_id" ColumnName="album_id" />
                 <ScalarProperty Name="artist_id" ColumnName="artist_id" />
                 <ScalarProperty Name="title" ColumnName="title" />

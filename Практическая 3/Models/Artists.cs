@@ -6,7 +6,6 @@
 //     Изменения, вносимые в этот файл вручную, будут перезаписаны при повторном создании кода.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Практическая_3.Models
 {
@@ -26,28 +25,11 @@ namespace Практическая_3.Models
         public int artist_id { get; set; }
         public int account_id { get; set; }
         public int producer_id { get; set; }
-
-        [Required(ErrorMessage = "Длина должна быть не более 50 символов")]
-        [StringLength(50, MinimumLength = 1)]
         public string first_name { get; set; }
-
-        [Required(ErrorMessage = "Длина должна быть не более 50 символов")]
-        [StringLength(50, MinimumLength = 1)]
         public string last_name { get; set; }
-
-        [Required(ErrorMessage = "Длина должна быть не более 20 символов")]
-        [StringLength(20, MinimumLength = 1)]
         public string phone_number { get; set; }
-        [Required(ErrorMessage = "Длина должна быть не более 20 символов")]
-        [StringLength(20, MinimumLength = 1)]
         public string passport_number { get; set; }
-
-        [Required(ErrorMessage = "Длина должна быть не более 24 символов")]
-        [StringLength(24, MinimumLength = 1)]
         public string middle_name { get; set; }
-
-        [Required(ErrorMessage = "Длина должна быть не более 64 символов")]
-        [StringLength(64, MinimumLength = 1)]
         public string photo_path { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -55,7 +37,6 @@ namespace Практическая_3.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Albums> Albums { get; set; }
         public virtual UserAccounts UserAccounts { get; set; }
-
         public virtual Producers Producers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RoomSchedules> RoomSchedules { get; set; }

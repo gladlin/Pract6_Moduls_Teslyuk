@@ -24,42 +24,55 @@
             <Button x:Name="btnResetFilters" Content="Сбросить фильтры" Click="btnResetFilters_Click" Height="32" Width="144"/>
         </StackPanel>
 
-        <ListView Name="LViewProduct" Grid.Column="0" Grid.ColumnSpan="1"
-                  Grid.Row="0" Margin="5,100,5,100" d:ItemsSource="{d:SampleData}" >
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
 
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                </Style>
-            </ListView.ItemContainerStyle>
+        <FlowDocumentReader x:Name="flowDocumentReader"  ViewingMode="Scroll">
+            <FlowDocument PageWidth="Auto">
+                <BlockUIContainer>
+                    <!-- 
+            Таблица (ListView) для отображения списка работников из базы данных.
+           Данные загружаются из списка пользователй и привязываются к элементам ListView через DataTemplate.
+        -->
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" Background="White" Width="200" Margin="5">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Image Width="100" Height="100" Margin="5" Source="{Binding PicturePath}" />
-                            <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center" Margin="5"/>
-                            <TextBlock Text="{Binding Role}" TextAlignment="Center" Margin="5"/>
-                            <TextBlock Text="{Binding Email}" TextAlignment="Center" Margin="5"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                    <ListView Name="LViewProduct" Margin="5,100,5,100" d:ItemsSource="{d:SampleData ItemCount=1}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-            <ListView.ContextMenu>
-                <ContextMenu Name="contextMenu">
-                    <MenuItem Name="btnSeeUser" Header="Перейти к пользователю"
-                              Click="btnSeeUser_Click"/>
-                </ContextMenu>
-            </ListView.ContextMenu>
-        </ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image Width="100" Height="100" Margin="5" Source="{Binding PicturePath}" />
+                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" TextAlignment="Center" Margin="5"/>
+                                        <TextBlock Text="{Binding Role}" TextAlignment="Center" Margin="5"/>
+                                        <TextBlock Text="{Binding Email}" TextAlignment="Center" Margin="5"/>
+                                    </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-        <Button x:Name="btnAddUser" Content="Добавить пользователя" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                Margin="0,727,0,0" Width="222" Height="43" Click="btnAddUser_Click"/>
+                        <ListView.ContextMenu>
+                            <ContextMenu Name="contextMenu">
+                                <MenuItem Name="btnSeeUser" Header="Перейти к пользователю"
+                                          Click="btnSeeUser_Click"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="True"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                    </ListView>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
+        <Button x:Name="btnAddUser" Content="Добавить пользователя" HorizontalAlignment="Left" 
+                Margin="154,662,0,0" Width="222" Height="44" Click="btnAddUser_Click" VerticalAlignment="Top"/>
+        <Button x:Name="btnPrintDocs" Content="Печать документов" Margin="0,664,128,0" Width="222" Click="btnPrintDocs_Click" Height="40" VerticalAlignment="Top" HorizontalAlignment="Right"/>
     </Grid>
 </Page>

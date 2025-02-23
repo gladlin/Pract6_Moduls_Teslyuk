@@ -59,6 +59,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Document.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Drawing.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Drawing.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -149,12 +158,22 @@
     <Compile Include="Pages\Admin.xaml.cs">
       <DependentUpon>Admin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Albums.xaml.cs">
+      <DependentUpon>Albums.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ConfirmEmail.xaml.cs">
+      <DependentUpon>ConfirmEmail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ForgotPassword.xaml.cs">
+      <DependentUpon>ForgotPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SeeUserDetail.xaml.cs">
       <DependentUpon>SeeUserDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Helper.cs" />
     <Compile Include="Services\Hash.cs" />
+    <Compile Include="Services\MailService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -175,11 +194,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Albums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Autho.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ConfirmEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ForgotPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,6 +280,9 @@
       <LastGenOutput>MusicRecordEntities.cs</LastGenOutput>
     </Content>
     <Resource Include="pngegg.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

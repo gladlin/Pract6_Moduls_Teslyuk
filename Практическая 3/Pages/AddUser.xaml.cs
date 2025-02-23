@@ -1,17 +1,19 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
+using Xceed.Words.NET;
 using Практическая_3.Models;
 using Практическая_3.Services;
+using static System.Net.Mime.MediaTypeNames;
 namespace Практическая_3.Pages
 {
     public partial class AddUser : Page
@@ -42,6 +44,10 @@ namespace Практическая_3.Pages
         {
             var db = Helper.GetContext();
             int maxId = db.UserAccounts.OrderByDescending(u => u.account_id).First().account_id + 1;
+            /*
+             Получение id последней записи в таблице, после прибавляем 1, 
+             чтобы получить account_id для новой записи, создаваемой далее
+             */
             var newUser = new UserAccounts
             {
                 username = tbLogin.Text,
@@ -51,11 +57,19 @@ namespace Практическая_3.Pages
                 account_id = maxId,
             };
 
+
+            // проверка того, что все поля в созданной структуре соответсвуют всем необходимым ограничениям
+            // нужно для корректного сохранения пользователя в БД.
             var context = new ValidationContext(newUser);
             var results = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
             if (!Validator.TryValidateObject(newUser, context, (ICollection<System.ComponentModel.DataAnnotations.ValidationResult>)results, true))
             {
-                MessageBox.Show("Не получилось создать пользователя, введите корретные данные");
+                StringBuilder sb = new StringBuilder();
+                foreach (var reason in results)
+                {
+                    sb.AppendLine(reason.ToString());
+                }
+                MessageBox.Show(sb.ToString());
                 return;
             }
             db.UserAccounts.Add(newUser);
@@ -104,6 +118,7 @@ namespace Практическая_3.Pages
                 db.SaveChanges();
                 if (isCreated == 1)
                 MessageBox.Show("Пользователь успешно создан!");
+                createFile(newUser);
             }
             catch (Exception ex)
             {
@@ -128,7 +143,13 @@ namespace Практическая_3.Pages
                 return admin;
             else
             {
-                MessageBox.Show("Не получилось создать администратора, введите корретные данные");
+                StringBuilder sb = new StringBuilder();
+                foreach (var reason in results)
+                {
+                    /*добавление новой строки в конец строки sb*/
+                    sb.AppendLine(reason.ToString());
+                }
+                MessageBox.Show(sb.ToString());
                 return null;
             }
         }
@@ -153,7 +174,12 @@ namespace Практическая_3.Pages
                 return artist;
             else
             {
-                MessageBox.Show("Не получилось создать артиста, введите корретные данные");
+                StringBuilder sb = new StringBuilder();
+                foreach (var reason in results)
+                {
+                    sb.AppendLine(reason.ToString());
+                }
+                MessageBox.Show(sb.ToString());
                 return null;
             }
         }
@@ -178,7 +204,12 @@ namespace Практическая_3.Pages
                 return producer;
             else
             {
-                MessageBox.Show("Не получилось создать продюссера, введите корретные данные");
+                StringBuilder sb = new StringBuilder();
+                foreach (var reason in results)
+                {
+                    sb.AppendLine(reason.ToString());
+                }
+                MessageBox.Show(sb.ToString());
                 return null;
             }
         }
@@ -241,6 +272,7 @@ namespace Практическая_3.Pages
             }
         }
 
+        // Показ определенных полей страницы в зависимости от роли пользователя
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedRole = cbRole.SelectedIndex;
@@ -275,5 +307,72 @@ namespace Практическая_3.Pages
                     break;
             }
         }
+        private void createFile(UserAccounts newUser)
+        {
+            try
+            {
+                MusicRecordEntities db = Helper.GetContext();
+                string fullNameStaff = string.Join(" ", tbSurname.Text, tbFirstname.Text, tblMiddleName.Text);
+                 
+               
+                string date = DateTime.Now.ToLongDateString();
+
+                string workDate = DateTime.Now.AddDays(1).ToString();
+                string workDateS = DateTime.Now.AddDays(1).ToLongDateString();
+                string dateOfSigning = DateTime.Now.ToShortDateString();
+
+                var staffSpeciality = (db.Roles.FirstOrDefault(x => x.id_role == newUser.role_id)).role_name;
+
+                var items = new Dictionary<string, string>()
+                {
+                    {"<Number>", Convert.ToString(newUser.account_id)},
+                    {"<City>", "Новосибирск" },
+                    {"<DateOfCreate>", date },
+                    {"<MusicRecord>", "Студия звукозаписи"},
+                    {"<MusicRecordName>", "Для четких реперов" },
+                    {"<Director>", "Тимура Ильдаровича Юнусова" },
+                    {"<FullNameStaff>", fullNameStaff},
+                    {"<MusicRecordItem>", "студию звукозаписи \"Для четких реперов\"" },
+                    {"<Role>", staffSpeciality },
+                    {"<AddresRecord>", "Светлая 86" },
+                    {"<WorkDate>", workDate},
+                    {"<Probation>",  "3(три)"},
+                    {"<Salary>", "20000" },
+                    {"<SalaryLetters>", "двадцать тысяч" },
+                    {"<NormDock>", "Отпускные выплаты" },
+                    {"<DescripNormalDock>", "(выплаты с размере 0.5% от оклада)" },
+                    {"<DirectorINN>", "638469378" },
+                    {"<DirectorNameINN>", "BlackStar Mafia" },
+                    {"<GeneralDirector>", "Егор Николаевич Булаткин" },
+                    {"<GeneralDirectorSocr>", "Булаткин Е. Н." },
+                    {"<GeneralDirectorSign>", "<Подпись>" },
+                    {"<Passport>", tbPassport.Text },
+                    {"<Issued>", "ГУ МВД по Новосибирской Области"},
+                    {"<DateOfSigning>",  dateOfSigning}
+                };
+
+                using (var doc = DocX.Load("C:\\Users\\Alina\\source\\repos\\-34\\Практическая 3\\Contracts\\defaultContract.docx"))
+                {
+                    foreach (var item in items)
+                    {
+                        foreach (var paragraph in doc.Paragraphs)
+                        {
+                            if (paragraph.Text.Contains(item.Key))
+                            {
+                                paragraph.ReplaceText(item.Key, item.Value);
+                            }
+                        }
+                    }
+                    doc.SaveAs($@"C:\Users\Alina\source\repos\-34\Практическая 3\Contracts\{tbSurname.Text}Contract.docx");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 }

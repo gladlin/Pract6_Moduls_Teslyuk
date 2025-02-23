@@ -9,6 +9,11 @@ namespace Практическая_3.Services
 {
     public class Helper
     {
+        /// <summary>
+        /// Дает возможность для взаимодействия с бд
+        /// </summary>
+        /// <returns>Контекст базы данных.</returns>
+        
         public static MusicRecordEntities _context;
 
         public static MusicRecordEntities GetContext()
@@ -16,23 +21,6 @@ namespace Практическая_3.Services
             if (_context == null)
                 _context = new MusicRecordEntities();
             return _context;
-        }
-
-        public void CreateUser(UserAccounts user)
-        {
-            _context.UserAccounts.Add(user);
-            _context.SaveChanges();
-        }
-        public void UpdateUser(UserAccounts user)
-        {
-            _context.Entry(user).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
-        }
-        public void RemoveUser(int idUser)
-        {
-            var users = _context.UserAccounts.Find(idUser);
-            _context.UserAccounts.Remove(users);
-            _context.SaveChanges();
         }
     }
 }

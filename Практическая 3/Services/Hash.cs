@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 namespace Практическая_3.Services
 {
     public class Hash
+
+        /// <summary>
+        /// Хэширует пароль, чтобы безопасно хранить его в БД
+        /// </summary>
+        /// <param name="password">Незахэшированный пароль</param>
+        /// <returns>Хэшированный пароль.</returns>
     {
         public static string HashPassword(string password)
         {

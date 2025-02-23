@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using Практическая_3.Models;
 using Практическая_3.Services;
 
@@ -89,6 +90,7 @@ namespace Практическая_3.Pages
                 userList.Add(userStruct);
             }
 
+            //копируется значение из одного массива в другое, но каждый из массивов будет указывать на разные участки памяти
             userListSearch = new ObservableCollection<userStruct>(userList);
         }
 
@@ -161,6 +163,26 @@ namespace Практическая_3.Pages
             tbSearchSurname.Text = "";
             cbRole.SelectedIndex = -1;
             ChangeListUsers();
+        }
+
+        private void btnPrintDocs_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument doc = flowDocumentReader.Document;
+
+            if (doc == null)
+            {
+                MessageBox.Show("Документ не найден");
+                return;
+            }
+            else
+            {
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    IDocumentPaginatorSource idpSource = doc;
+                    printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников");
+                }
+            }
         }
     }
 }

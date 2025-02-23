@@ -28,6 +28,7 @@ namespace Практическая_3.Models
         public string title { get; set; }
         public string genre { get; set; }
         public Nullable<System.DateTime> release_date { get; set; }
+        public string cover { get; set; }
     
         public virtual Artists Artists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
